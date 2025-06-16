@@ -7,17 +7,32 @@ import androidx.lifecycle.ViewModel
 class MainViewModel: ViewModel() {
 
     private val _login: MutableLiveData<String> = MutableLiveData<String>()
+    private val _senha: MutableLiveData<String> = MutableLiveData<String>()
 
     fun login(): LiveData<String> {
         return _login
     }
 
-    fun doLogin(name: String) {
-        if (name.isEmpty()){
-            _login.value = "Informe seu nome!"
+    fun senha(): LiveData<String> {
+        return _senha
+    }
+
+    fun doLogin(email: String, senha: String) {
+        var valid = true
+
+        if (email.isBlank()) {
+            _login.value = "Informe seu e-mail!"
+            valid = false
         }
-        else {
-            _login.value = "Login feito com sucesso!"
+
+        if (senha.isBlank()) {
+            _senha.value = "Informe sua senha!"
+            valid = false
+        }
+
+        if (valid) {
+            _login.value = "Login efetuado com sucesso!"
+            _senha.value = ""  // limpa mensagem de senha, se quiser
         }
     }
 }

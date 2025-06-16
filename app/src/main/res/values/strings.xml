@@ -3,8 +3,10 @@
 
     <string name="text_title">Arquitetura MVVM</string>
     <string name="text_email">E-mail</string>
+    <string name="text_password">Senha</string>
 
     <string name="hint_email">email@email.com</string>
+    <string name="hint_password">Informe sua senha</string>
 
     <string name="button_login">Login</string>
 

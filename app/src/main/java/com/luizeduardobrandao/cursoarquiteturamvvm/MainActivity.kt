@@ -35,15 +35,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (v.id){
             R.id.button_login -> {
                 val email = binding.edittextEmail.text.toString()
+                val password = binding.edittextPassword.text.toString()
 
                 // validação simples (se tiver qualquer coisa preenchida em edittext, ativa o botão login)
-                viewModel.doLogin(email)
+                viewModel.doLogin(email, password)
             }
         }
     }
 
     private fun setObservers() {
         viewModel.login().observe(this) {
+            Toast.makeText(applicationContext, it, Toast.LENGTH_SHORT).show()
+        }
+        viewModel.senha().observe(this) {
             Toast.makeText(applicationContext, it, Toast.LENGTH_SHORT).show()
         }
     }
@@ -95,5 +99,37 @@ Conceito Arquitetura MVVM
     - Alterar para private a variável login.
 
 -> 6. No "MainActivity" pre chamar a função que implementa o met0do de click.
+
+*** Resumo
+
+1. res/layout/activity_main.xml
+
+Crie em   app/src/main/res/layout/activity_main.xml
+
+Este é o layout da sua tela principal:
+    - ScrollView para permitir rolagem se necessário
+    - ConstraintLayout como container
+    - View colorida no topo, TextViews, EditTexts e um Button
+
+
+2. MainViewModel.kt
+
+Crie em   app/src/main/java/.../MainViewModel.kt
+
+Nesta classe você:
+    - Declara MutableLiveData para mensagens de login e senha
+    - Expõe-as como LiveData para a View observar
+    - Implementa doLogin() com validações simples
+
+
+3. MainActivity.kt
+
+ Crie em   app/src/main/java/.../MainActivity.kt
+
+Aqui você:
+    - Configura ViewBinding e Edge-to-Edge
+    - Obtém o ViewModel via viewModels()
+    - Define listeners de clique e observa LiveData
+    - Mostra toasts conforme fluxos de dados do ViewModel
 
  */
